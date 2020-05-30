@@ -1,0 +1,24 @@
+[ng-cloak] {
+    display: none !important;
+}
+
+.orderImage {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.row {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.details>div {
+    text-align: center;
+}
+
+.nestingDivs{
+    margin-left: 20px;
+}

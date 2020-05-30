@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Orders Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script data-main="js/" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script>require(['js/main.js'])</script>
+</head>
+
+<body ng-controller="ordersAppController" ng-cloak>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+    <div class="container col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row" ng-repeat="order in orders">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 orderImage">
+                <i class="fa fa-first-order" ng-click="getOrderDetails(order)" data-toggle="modal" data-target="#orderDetails"></i>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 orderInfo">
+                <div class="details">
+                    <div>
+                        Name: {{order.name}}
+                    </div>
+                    <div>
+                        Price:{{order.price}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="orderDetails">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            ORDER STATUS DETAILS
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <strong>{{selectedOrder.name}}</strong>
+                            </div>
+                            <div>
+                                Price:{{selectedOrder.price}}
+                            </div>
+                            <div class="nestingDivs" ng-if="selectedOrder.customerPlacedOrder.status === 'completed'">
+                                <i class="fa fa-check"></i> Customer Has Placed the offer
+                                <div class="nestingDivs" ng-if="selectedOrder.vendorAcceptedOffer.status === 'completed'">
+                                    <i class="fa fa-check"></i> Vendor has accepted the offer
+                                    <div class="nestingDivs" ng-if="selectedOrder.vendorPreparedProduct.status === 'completed'">
+                                        <i class="fa fa-check"></i> Vendor has prepared the product for delivery
+                                        <div class="nestingDivs" ng-if="selectedOrder.orderShipped.status === 'completed'">
+                                            <i class="fa fa-check"></i> Order has been shipped
+                                            <div class="nestingDivs" ng-if="selectedOrder.customerReceivedOrder.status === 'completed'">
+                                                    <i class="fa fa-check"></i> Order has been received by the customer
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="selectedOrder.canCancel === 'Y'">
+                                <button type="button" class="btn btn-primary btn-md">Cancel Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+</body>
+
+</html>
